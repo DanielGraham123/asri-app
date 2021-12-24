@@ -107,7 +107,7 @@ export default defineComponent({
   // background: -webkit-linear-gradient(bottom, var(--q-dark), var(--q-primary));
   position: relative;
   z-index: 1;
-  background-image: url(../assets/tech2.jpg);
+  background-image: url(../assets/tech.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50%;
