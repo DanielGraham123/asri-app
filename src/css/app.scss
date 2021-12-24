@@ -1,1 +1,11 @@
 // app global css in SCSS form
+// #langSwitcher {
+.q-field__append,
+.q-field__native > span {
+  color: white !important;
+}
+
+.q-select {
+  border: 1px solid #9a9ca9;
+}
+// }

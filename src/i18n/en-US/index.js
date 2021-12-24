@@ -1,7 +1,21 @@
-// This is just an example,
-// so you can safely delete all default props below
-
 export default {
-  failed: 'Action failed',
-  success: 'Action was successful'
-}
+  appName: "AUTOMATIC SYSTEM FOR RECOGINITION & IDENTIFICATION",
+  Translate: "Translate",
+  required: "is required",
+
+  // user sign up
+  FirstName: "First Name",
+  LastName: "Last Name",
+  email: "E-mail",
+  dob: "Date of Birth",
+  field: "Profesional Field",
+  phone: "Phone Number",
+  comment: "Any Other Info",
+  additional: "Additional Info",
+  submitUser: "Submit",
+
+  // fields
+  security: "Security & Defense",
+  medecine: "Public Health",
+  finance: "Finance",
+};

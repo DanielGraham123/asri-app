@@ -2,15 +2,32 @@
   <q-layout view="lHh Lpr lFf">
     <q-page-container class="q-py-xl">
       <div class="text-center q-pb-0 q-mb-md">
-        <q-icon name="img:asri-logo-l.png" size="lg" class="logo-l" />
+        <q-icon name="img:asri-logo.png" class="logo-l" />
+
+        <div class="text-white q-mt-md h5">
+          {{ $t("appName") }}
+        </div>
       </div>
+
       <router-view />
+
+      <q-footer
+        class="row q-px-md q-mb-sm align-center justify-between bg-transparent"
+      >
+        <div class="q-my-auto">Copyright &copy; A.S.R.I. 2022</div>
+
+        <LangSwitcher class="q-mb-s"></LangSwitcher>
+      </q-footer>
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
 import EssentialLink from "components/EssentialLink.vue";
+import LangSwitcher from "components/LanguageSwitcher.vue";
+
+// import "../css/style.css";
+import "../css/tailwind.css";
 
 const linksList = [
   {
@@ -64,6 +81,7 @@ export default defineComponent({
 
   components: {
     EssentialLink,
+    LangSwitcher,
   },
 
   setup() {
@@ -77,36 +95,68 @@ export default defineComponent({
       },
     };
   },
+
+  methods: {},
 });
 </script>
 
 <style lang="scss">
+@import "../css/tailwind.css";
+
 .q-page-container {
-  background: -webkit-linear-gradient(bottom, var(--q-primary), var(--q-info));
+  // background: -webkit-linear-gradient(bottom, var(--q-dark), var(--q-primary));
   position: relative;
-  z-index: 4;
+  z-index: 1;
+  background-image: url(../assets/tech2.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  max-width: 100%;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    // background-image: linear-gradient(to bottom right, #0c0c0c, #0f0f0f);
+    background-image: linear-gradient(to bottom right, #060f4e, #0f0f0f);
+    opacity: 0.6;
+    z-index: -1;
+  }
 }
 
 .logo-l {
   max-width: 100%;
   background-size: contain;
   font-size: 3.8rem !important;
-  width: 185px;
+  width: 92px;
+  height: 107px;
 }
-.q-page-container::before {
-  content: "";
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-image: url(../assets/img-01.webp);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+
+.q-footer {
+  padding-top: 2rem !important;
 }
-.authForm {
-  width: 300px;
+
+@media (min-width: 991px) {
+  .q-layout {
+    position: fixed;
+  }
+}
+
+@media (max-width: 991px) {
+  .q-footer {
+    position: absolute;
+  }
+}
+
+@media (max-height: 525px) {
+  .q-footer {
+    position: absolute;
+  }
+  .q-layout {
+    position: absolute;
+  }
 }
 </style>
