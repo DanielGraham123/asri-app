@@ -13,6 +13,8 @@ export default {
   comment: "Autres détails",
   additional: "Autres Information",
   submitUser: "Soummetre",
+  alreadyUser: "Vous avez déjà un compte?",
+  login: "S'identifier",
 
   // fields
   security: "La Defense",

@@ -95,6 +95,7 @@
             dense
             v-model="userData.dob"
             mask="date"
+            :hint="$t('dob')"
             :rules="['date']"
           >
             <template v-slot:append>
@@ -190,10 +191,10 @@
     </form-frame>
     <!-- Already have an account -->
     <div class="text-center q-pb-lg">
-      <div class="text-grey-5">
-        Already have an account?
+      <div class="text-grey-5" >
+        {{ $t("alreadyUser") }}
         <router-link to="/" style="text-decoration: none" class="text-warning"
-          >Sign In</router-link
+          >{{ $t("login") }}</router-link
         >
       </div>
     </div>

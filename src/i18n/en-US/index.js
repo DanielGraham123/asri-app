@@ -13,6 +13,8 @@ export default {
   comment: "Any Other Info",
   additional: "Additional Info",
   submitUser: "Submit",
+  alreadyUser: "Already have an account?",
+  login: "Sign In",
 
   // fields
   security: "Security & Defense",
