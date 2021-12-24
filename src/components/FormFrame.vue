@@ -1,7 +1,6 @@
 <template>
   <div class="full-width row justify-center items-start">
     <div class="text-white card column q-py-md q-px-md">
-      <!-- <div class="col-md-12 content-center"> -->
       <q-form
         @submit="submitMethod"
         @reset="reset"
@@ -10,15 +9,12 @@
         :class="[gutter != null ? gutter : 'q-gutter-md']"
         :style="{ width: formWidth }"
       >
-        <!-- <div class="mx-2"> -->
         <slot></slot>
-        <!-- </div> -->
 
         <div>
           <slot name="button"></slot>
         </div>
       </q-form>
-      <!-- </div> -->
     </div>
   </div>
 </template>

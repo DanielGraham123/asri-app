@@ -3,11 +3,11 @@
     <form-frame
       :submitMethod="submitSignUp"
       :gutter="'q-gutter-x-sm'"
-      :formWidth="'450px'"
+      :formWidth="formWidth"
     >
       <!-- Row 1 -->
-      <div class="row justify-between">
-        <div class="col-sm-6 col-12 q-gutter-x-sm">
+      <div class="row rf">
+        <div class="col-sm-6 col-xs-12 q-gutter-x-sm">
           <q-input
             outlined
             square
@@ -25,7 +25,7 @@
           />
         </div>
 
-        <div class="col-sm-6 col-12 q-gutter-x-sm">
+        <div class="col-sm-6 col-xs-12 q-gutter-x-sm">
           <q-input
             outlined
             square
@@ -45,8 +45,8 @@
       </div>
 
       <!-- Row 2 -->
-      <div class="row justify-between">
-        <div class="col-sm-6 col-12 q-gutter-x-sm">
+      <div class="row rf">
+        <div class="col-sm-6 col-xs-12 q-gutter-x-sm">
           <q-input
             outlined
             square
@@ -64,7 +64,7 @@
           />
         </div>
 
-        <div class="col-sm-6 col-12 q-gutter-x-sm">
+        <div class="col-sm-6 col-xs-12 q-gutter-x-sm">
           <q-input
             outlined
             dense
@@ -85,8 +85,8 @@
       </div>
 
       <!-- Row 3 -->
-      <div class="row justify-between">
-        <div class="col-sm-6 col-12 q-gutter-x-sm">
+      <div class="row rf">
+        <div class="col-sm-6 col-xs-12 q-gutter-x-sm">
           <q-input
             outlined
             square
@@ -116,7 +116,7 @@
           </q-input>
         </div>
 
-        <div class="col-sm-6 col-12 q-gutter-x-sm">
+        <div class="col-sm-6 col-xs-12 q-gutter-x-sm">
           <q-select
             outlined
             v-model="userData.field"
@@ -133,8 +133,8 @@
       </div>
 
       <!-- Row 4 -->
-      <div class="row q-mt-auto">
-        <div class="col-md-12 justify-between row items-center q-gutter-x-sm">
+      <div class="row q-mt-auto q-mb-xs">
+        <div class="col-md-12 row justify-between items-center q-gutter-x-sm">
           <div class="text-italic text-grey-5">{{ $t("additional") }}?</div>
           <q-btn
             flat
@@ -189,7 +189,7 @@
       </template>
     </form-frame>
     <!-- Already have an account -->
-    <div class="text-center q-pb-md">
+    <div class="text-center q-pb-lg">
       <div class="text-grey-5">
         Already have an account?
         <router-link to="/" style="text-decoration: none" class="text-warning"
@@ -197,6 +197,8 @@
         >
       </div>
     </div>
+
+    <q-resize-observer @resize="onResize" />
   </q-page>
 </template>
 
@@ -216,6 +218,7 @@ export default {
       password: "",
       acceptTerms: false,
       prompt: false,
+      formWidth: "450px",
       fieldOptions: [
         this.$t("security"),
         this.$t("medecine"),
@@ -241,6 +244,32 @@ export default {
       console.log("user password: ", this.password);
       console.log("user terms: ", this.acceptTerms);
     },
+
+    onResize(size) {
+      console.log(size);
+      // {
+      //   width: 1200 // width of viewport (in px)
+      //   height: 920 // height of viewport (in px)
+      // }
+      if (size.width > 600) {
+        //md is 992px
+        this.formWidth = "500px";
+      } else {
+        this.formWidth = "100%";
+      }
+    },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.row.rf {
+  justify-content: space-between;
+}
+
+@media (max-width: 600px) {
+  .row.rf {
+    justify-content: center;
+  }
+}
+</style>

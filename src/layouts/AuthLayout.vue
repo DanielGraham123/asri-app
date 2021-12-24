@@ -4,7 +4,7 @@
       <div class="text-center q-pb-0 q-mb-md">
         <q-icon name="img:asri-logo.png" class="logo-l" />
 
-        <div class="text-white q-mt-md h5">
+        <div class="text-white q-px-lg q-mt-md h5">
           {{ $t("appName") }}
         </div>
       </div>
@@ -133,10 +133,6 @@ export default defineComponent({
   font-size: 3.8rem !important;
   width: 92px;
   height: 107px;
-}
-
-.q-footer {
-  padding-top: 2rem !important;
 }
 
 @media (min-width: 991px) {
