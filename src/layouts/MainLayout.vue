@@ -1,6 +1,6 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+  <q-layout view="lHh Lpr lFf" class="shad">
+    <q-header elevated style="background-color: var(--q-secondary)">
       <q-toolbar>
         <q-btn
           flat
@@ -11,27 +11,50 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title> A.S.R.I. </q-toolbar-title>
+        <q-img src="~assets/tech.jpg" class="header-image absolute-top"></q-img>
 
-        <div>ASRI v{{ $q.version }}</div>
+        <!-- <div class="q-px-lg q-pt-lg q-pb-md">
+          <div class="text-h3">Todo-M</div>
+        </div> -->
       </q-toolbar>
     </q-header>
 
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
+      bordered
+      elevated
       :width="270"
       :breakpoint="600"
-      class=""
+      class="text-white"
     >
+      <q-toolbar-title class="absolute-top text-left q-pa-md q-ml-lg">
+        A.S.R.I.
+      </q-toolbar-title>
+
       <q-scroll-area
         style="
           height: calc(100% - 270px);
-          margin-top: 150px;
+          margin-top: 50px;
           border-right: 1px solid #ddd;
         "
       >
         <q-list padding>
+          <q-item style="border-bottom: 1px dotted grey" class="">
+            <q-item-section style="max-width: 52px">
+              <q-avatar>
+                <img src="https://cdn.quasar.dev/img/avatar.png" />
+              </q-avatar>
+            </q-item-section>
+
+            <q-item-section>
+              <div class="text-grey-3">
+                <div class="text-weight-bold text-">John Doe</div>
+                <div class="text-">Hopital la Quintini</div>
+              </div></q-item-section
+            >
+          </q-item>
+
           <q-item clickable v-ripple>
             <q-item-section avatar>
               <q-icon name="dashboard" />
@@ -50,18 +73,7 @@
         </q-list>
       </q-scroll-area>
 
-      <q-img
-        class="absolute-top text-center bg-white border-bottom"
-        style="height: 150px; border-bottom: 1px solid #757575"
-      >
-        <div class="absolute-bottom bg-transparent">
-          <q-avatar size="56px" class="q-mb-sm" color="indigo-4">
-            <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-          </q-avatar>
-          <div class="text-weight-bold text-primary">Amougou Jonas</div>
-          <div class="text-primary">Hopital la Quintini</div>
-        </div>
-      </q-img>
+      <q-img src="~assets/tech.jpg" class="side-bg absolute-top"></q-img>
     </q-drawer>
 
     <q-page-container>
@@ -140,3 +152,24 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss">
+.header-image,
+.side-bg {
+  height: 100%;
+  z-index: -1;
+  opacity: 0.2;
+  filter: grayscale(100%);
+}
+
+.side-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  // background-image: linear-gradient(to bottom right, #0c0c0c, #0f0f0f);
+  background: linear-gradient(to bottom right, #0c0c0c, #0f0f0f);
+}
+</style>
