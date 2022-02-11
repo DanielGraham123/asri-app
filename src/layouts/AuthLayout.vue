@@ -16,7 +16,11 @@
       >
         <div class="q-my-auto">Copyright &copy; A.S.R.I. 2022</div>
 
-        <LangSwitcher class="q-mb-s"></LangSwitcher>
+        <LangSwitcher
+          class="q-mb-s"
+          :outlined="true"
+          :textColor="'orange'"
+        ></LangSwitcher>
       </q-footer>
     </q-page-container>
   </q-layout>
@@ -122,7 +126,7 @@ export default defineComponent({
     left: 0;
     // background-image: linear-gradient(to bottom right, #0c0c0c, #0f0f0f);
     background-image: linear-gradient(to bottom right, #060f4e, #0f0f0f);
-    opacity: 0.6;
+    opacity: 0.2;
     z-index: -1;
   }
 }

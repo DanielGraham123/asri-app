@@ -1,48 +1,124 @@
 <template>
-  <q-layout view="lHh Lpr lFf" class="shad">
-    <q-header elevated style="background-color: var(--q-secondary)">
-      <q-toolbar>
-        <q-btn
+  <q-layout view="lHh Lpr lFf" class="">
+    <q-header class="bg-white">
+      <q-toolbar class="text-dark shadow-1">
+        <!-- page title -->
+        <div class="q-pa-sm">
+          <div class="text-h6">Dashboard</div>
+        </div>
+        <q-space />
+
+        <!-- search field -->
+        <div class="q-py-md q-px-md" color="negative" style="min-width: 700px">
+          <q-input
+            rounded
+            standout="bg-grey-13 black"
+            placeholder="Search"
+            dense
+            hide-bottom-space
+            v-model="searchText"
+            class="text-negative"
+            bottom-slots
+            clearable
+          >
+            <template #prepend>
+              <q-icon name="search" />
+            </template>
+          </q-input>
+        </div>
+
+        <q-space />
+
+        <!-- translation dropdown -->
+        <q-select
+          :options="flags"
+          outlined
           flat
           dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+          v-model="locale"
+          emit-value
+          map-options
+          options-dense
+          bg-color="transparent"
+          style="min-width: 100px"
+        >
+          <template #prepend>
+            <q-icon
+              v-if="locale"
+              :name="'img:flags/' + locale.split('-')[1].toLowerCase() + '.svg'"
+            />
+          </template>
 
-        <q-img src="~assets/tech.jpg" class="header-image absolute-top"></q-img>
+          <template v-slot:option="scope">
+            <q-item v-bind="scope.itemProps" v-on="scope.itemEvents">
+              <q-item-section side>
+                <q-icon :name="'img:flags/' + scope.opt.flag + '.svg'" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label v-html="scope.opt.label" />
+              </q-item-section>
+            </q-item>
+          </template>
+        </q-select>
 
-        <!-- <div class="q-px-lg q-pt-lg q-pb-md">
-          <div class="text-h3">Todo-M</div>
-        </div> -->
+        <!-- notifications -->
+        <q-btn flat round dense icon="notifications_none" class="q-mx-md" />
+
+        <!-- profile -->
+        <q-btn flat dense rounded class="" icon-right="arrow_drop_down">
+          <q-avatar class="q-mx-sm">
+            <img src="https://cdn.quasar.dev/img/avatar.png" />
+          </q-avatar>
+
+          <!-- <div class="text-weight-bold text-">John Doe</div> -->
+
+          <q-menu fit anchor="bottom left" self="top left">
+            <q-list style="mpx">
+              <q-item clickable>
+                <q-item-section>Profile</q-item-section>
+              </q-item>
+              <q-item clickable>
+                <q-item-section>Inbox</q-item-section>
+              </q-item>
+              <q-item clickable>
+                <q-item-section>Account Settings</q-item-section>
+              </q-item>
+              <q-item clickable>
+                <q-item-section>Logout</q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
+        </q-btn>
       </q-toolbar>
     </q-header>
 
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
-      bordered
-      elevated
+      :mini="miniState"
+      @mouseover="miniState = false"
+      @mouseout="miniState = true"
+      mini-to-overlay
       :width="270"
       :breakpoint="600"
       class="text-white"
     >
-      <q-toolbar-title class="absolute-top text-left q-pa-md q-ml-lg">
-        A.S.R.I.
-      </q-toolbar-title>
+      <!-- height: calc(100% - 270px) -->
+      <q-scroll-area style="height: 100%">
+        <q-list>
+          <q-item class="q-pb-md">
+            <q-item-section avatar>
+              <q-icon class="dash-logo" name="img:asri-icon.png" />
+            </q-item-section>
 
-      <q-scroll-area
-        style="
-          height: calc(100% - 270px);
-          margin-top: 50px;
-          border-right: 1px solid #ddd;
-        "
-      >
-        <q-list padding>
+            <q-item-section>
+              <div class="text-h5">A.S.R.I.</div>
+            </q-item-section>
+          </q-item>
+
           <q-item style="border-bottom: 1px dotted grey" class="">
-            <q-item-section style="max-width: 52px">
-              <q-avatar>
+            <q-item-section avatar>
+              <q-avatar style="max-width: 52px">
                 <img src="https://cdn.quasar.dev/img/avatar.png" />
               </q-avatar>
             </q-item-section>
@@ -63,7 +139,31 @@
             <q-item-section> Dashboard </q-item-section>
           </q-item>
 
-          <q-item clickable v-ripple to="/">
+          <q-item clickable v-ripple>
+            <q-item-section avatar>
+              <q-icon name="person" />
+            </q-item-section>
+
+            <q-item-section> Patient </q-item-section>
+          </q-item>
+
+          <q-item clickable v-ripple>
+            <q-item-section avatar>
+              <q-icon name="event" />
+            </q-item-section>
+
+            <q-item-section> Appointments </q-item-section>
+          </q-item>
+
+          <q-item clickable v-ripple>
+            <q-item-section avatar>
+              <q-icon name="settings" />
+            </q-item-section>
+
+            <q-item-section> Settings </q-item-section>
+          </q-item>
+
+          <q-item clickable v-ripple class="absolute-bottom q-mb-sm" to="/">
             <q-item-section avatar>
               <q-icon name="logout" />
             </q-item-section>
@@ -83,73 +183,49 @@
 </template>
 
 <script>
-import EssentialLink from "components/EssentialLink.vue";
+import LangSwitcher from "components/LanguageSwitcher.vue";
 
-const linksList = [
-  {
-    title: "Docs",
-    caption: "quasar.dev",
-    icon: "school",
-    link: "https://quasar.dev",
-  },
-  {
-    title: "Github",
-    caption: "github.com/quasarframework",
-    icon: "code",
-    link: "https://github.com/quasarframework",
-  },
-  {
-    title: "Discord Chat Channel",
-    caption: "chat.quasar.dev",
-    icon: "chat",
-    link: "https://chat.quasar.dev",
-  },
-  {
-    title: "Forum",
-    caption: "forum.quasar.dev",
-    icon: "record_voice_over",
-    link: "https://forum.quasar.dev",
-  },
-  {
-    title: "Twitter",
-    caption: "@quasarframework",
-    icon: "rss_feed",
-    link: "https://twitter.quasar.dev",
-  },
-  {
-    title: "Facebook",
-    caption: "@QuasarFramework",
-    icon: "public",
-    link: "https://facebook.quasar.dev",
-  },
-  {
-    title: "Quasar Awesome",
-    caption: "Community Quasar projects",
-    icon: "favorite",
-    link: "https://awesome.quasar.dev",
-  },
+const translateOptions = [
+  { label: "English", value: "en-US", country: "United States", flag: "us" },
+  { label: "French", value: "fr-FR", country: "France", flag: "fr" },
 ];
 
 import { defineComponent, ref } from "vue";
+import { useI18n } from "vue-i18n";
 
 export default defineComponent({
   name: "MainLayout",
 
   components: {
-    EssentialLink,
+    LangSwitcher,
   },
 
   setup() {
     const leftDrawerOpen = ref(false);
+    const { locale } = useI18n({ useScope: "global" });
 
     return {
-      essentialLinks: linksList,
+      locale,
+      flags: translateOptions,
       leftDrawerOpen,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },
     };
   },
+
+  data() {
+    return {
+      miniState: true,
+      searchText: "",
+      // flags: translateOptions,
+      // flagLocale: translateOptions[0],
+    };
+  },
+
+  watch: {},
+
+  methods: {},
 });
 </script>
 
@@ -171,5 +247,13 @@ export default defineComponent({
   left: 0;
   // background-image: linear-gradient(to bottom right, #0c0c0c, #0f0f0f);
   background: linear-gradient(to bottom right, #0c0c0c, #0f0f0f);
+}
+
+.q-item__section--side > .q-icon.dash-logo {
+  font-size: 42px !important;
+}
+
+.black {
+  color: black;
 }
 </style>
