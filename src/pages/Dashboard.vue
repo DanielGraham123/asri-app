@@ -1,8 +1,11 @@
 <template>
-  <q-page class="bg-grey-2 q-px-lg q-py-lg">
+  <q-page
+    class="q-px-lg q-py-lg"
+    :class="[$q.dark.mode ? 'bg-dark-body' : 'bg-grey-2']"
+  >
     <div class="row q-col-gutter-md items-end">
       <div class="col-xs-6 q-ml-auto">
-        <q-card class="jumbotron">
+        <q-card :class="[$q.dark.mode ? 'jumbotron-2' : 'jumbotron']">
           <q-card-section>
             <div class="row q-col-gutter-sm">
               <div class="col-xs-8">
@@ -109,7 +112,9 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, watch } from "vue";
+import { useQuasar } from "quasar";
+
 const columns = [
   {
     name: "name",
@@ -252,6 +257,13 @@ const rows = [
 
 export default defineComponent({
   setup() {
+    const $q = useQuasar();
+    watch(
+      () => $q.dark.isActive,
+      (val) => {
+        console.log(val ? "On dark mode" : "On light mode");
+      }
+    );
     return {
       columns,
       rows,
@@ -285,5 +297,9 @@ export default defineComponent({
 
 .jumbotron {
   background-color: $deep-purple-2;
+}
+
+.jumbotron-2 {
+  background-color: $deep-purple-8;
 }
 </style>

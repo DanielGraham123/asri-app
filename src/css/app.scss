@@ -10,6 +10,30 @@
   }
 }
 
-.q-drawer--left {
-  background-color: var(--q-secondary);
+.bg-dark-toolbar {
+  background-color: #1f1f1f;
+}
+
+.bg-dark-body {
+  background-color: #121212;
+}
+
+body.body--dark {
+  background: #000;
+}
+
+/***********************
+* DARK AND LIGHT MODES *
+************************/
+
+.body--light {
+  .q-drawer--left {
+    background-color: var(--q-secondary);
+  }
+}
+
+.body--dark {
+  .q-drawer--left {
+    background-color: var(--q-dark);
+  }
 }

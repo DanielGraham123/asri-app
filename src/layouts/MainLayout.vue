@@ -1,15 +1,17 @@
 <template>
-  <q-layout view="lHh Lpr lFf" class="">
-    <q-header class="bg-white">
-      <q-toolbar class="text-dark shadow-1">
+  <q-layout view="lHh Lpr lFf">
+    <q-header :class="[$q.dark.mode ? 'bg-dark-toolbar' : 'bg-white']">
+      <q-toolbar
+        class="text-dark shadow-1"
+        :class="[$q.dark.mode ? 'text-white' : '']"
+      >
         <!-- page title -->
         <div class="q-pa-sm">
           <div class="text-h6">Dashboard</div>
         </div>
-        <q-space />
 
         <!-- search field -->
-        <div class="q-py-md q-px-md" color="negative" style="min-width: 700px">
+        <div class="q-py-md q-px-md" color="negative" style="min-width: 680px">
           <q-input
             rounded
             standout="bg-grey-13 black"
@@ -27,20 +29,35 @@
           </q-input>
         </div>
 
-        <q-space />
+        <!-- switch dark button -->
+        <q-btn
+          flat
+          dense
+          round
+          :icon="$q.dark.mode ? 'light_mode' : 'dark_mode'"
+          @click="switchDark()"
+          class="q-mx-md"
+        ></q-btn>
 
-        <!-- translation dropdown -->
+        <!-- notifications -->
+        <q-btn flat round dense icon="notifications_none" class="q-mr-md" />
+
+        <!-- translate dropdown -->
         <q-select
           :options="flags"
-          outlined
           flat
           dense
           v-model="locale"
           emit-value
           map-options
           options-dense
+          :style="$q.screen.gt.sm ? { minWidth: '60px' } : ''"
           bg-color="transparent"
-          style="min-width: 100px"
+          class="q-mr-md"
+          :fill-input="$q.screen.gt.sm ? true : false"
+          :hide-selected="$q.screen.gt.sm ? false : true"
+          borderless
+          :outlined="$q.screen.gt.sm ? true : false"
         >
           <template #prepend>
             <q-icon
@@ -60,9 +77,6 @@
             </q-item>
           </template>
         </q-select>
-
-        <!-- notifications -->
-        <q-btn flat round dense icon="notifications_none" class="q-mx-md" />
 
         <!-- profile -->
         <q-btn flat dense rounded class="" icon-right="arrow_drop_down">
@@ -102,6 +116,8 @@
       :width="270"
       :breakpoint="600"
       class="text-white"
+      :class="$q.dark.mode ? 'dark-drawer' : ''"
+      :dark="$q.dark.mode ? true : false"
     >
       <!-- height: calc(100% - 270px) -->
       <q-scroll-area style="height: 100%">
@@ -184,6 +200,7 @@
 
 <script>
 import LangSwitcher from "components/LanguageSwitcher.vue";
+import { useQuasar } from "quasar";
 
 const translateOptions = [
   { label: "English", value: "en-US", country: "United States", flag: "us" },
@@ -192,6 +209,7 @@ const translateOptions = [
 
 import { defineComponent, ref } from "vue";
 import { useI18n } from "vue-i18n";
+import { watch } from "vue";
 
 export default defineComponent({
   name: "MainLayout",
@@ -203,11 +221,25 @@ export default defineComponent({
   setup() {
     const leftDrawerOpen = ref(false);
     const { locale } = useI18n({ useScope: "global" });
+    const $q = useQuasar();
+
+    // calling here; equivalent to when component is created
+    const switchDark = () => {
+      $q.dark.toggle();
+    };
+
+    watch(
+      () => $q.dark.isActive,
+      (val) => {
+        console.log(val ? "On dark mode" : "On light mode");
+      }
+    );
 
     return {
       locale,
       flags: translateOptions,
       leftDrawerOpen,
+      switchDark,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },
