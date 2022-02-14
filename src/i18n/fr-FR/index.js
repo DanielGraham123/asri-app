@@ -20,4 +20,7 @@ export default {
   security: "La Defense",
   medecine: "La Santé",
   finance: "Finances",
+
+  // dashboard
+  dashboard: "Tableau de Bord",
 };

@@ -36,4 +36,8 @@ body.body--dark {
   .q-drawer--left {
     background-color: var(--q-dark);
   }
+
+  .q-item--active {
+    color: var(--q-info);
+  }
 }

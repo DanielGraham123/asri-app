@@ -26,6 +26,7 @@
     "tailwindcss": "^3.0.7",
     "vue-country-flag": "^2.3.2",
     "vue-i18n": "^9.0.0",
+    "vue2-filters": "^0.14.0",
     "vuex": "^4.0.1"
   },
   "devDependencies": {

@@ -20,4 +20,7 @@ export default {
   security: "Security & Defense",
   medecine: "Public Health",
   finance: "Finance",
+
+  // dashboard
+  dashboard: "Dashboard",
 };

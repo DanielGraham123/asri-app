@@ -12,7 +12,6 @@ module.exports = configure(function (ctx) {
   return {
     // https://quasar.dev/quasar-cli/supporting-ts
     supportTS: false,
-
     // https://quasar.dev/quasar-cli/prefetch-feature
     // preFetch: true,
 
@@ -80,6 +79,7 @@ module.exports = configure(function (ctx) {
       config: {
         dark: "false", // or Boolean true/false
       },
+      cssAddon: true,
 
       // iconSet: 'material-icons', // Quasar icon set
       // lang: 'en-US', // Quasar language pack
