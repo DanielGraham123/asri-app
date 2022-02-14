@@ -3,12 +3,12 @@
     class="q-px-lg q-py-lg"
     :class="[$q.dark.mode ? 'bg-dark-body' : 'bg-grey-2']"
   >
-    <div class="row q-col-gutter-md items-end">
-      <div class="col-xs-6 q-ml-auto">
-        <q-card :class="[$q.dark.mode ? 'jumbotron-2' : 'jumbotron']">
+    <div class="row q-col-gutter-md q-col-gutter-sm-sm items-end">
+      <div class="col-xs-12 col-md-6 q-ml-auto">
+        <q-card fit :class="[$q.dark.mode ? 'jumbotron-2' : 'jumbotron']">
           <q-card-section>
             <div class="row q-col-gutter-sm">
-              <div class="col-xs-8">
+              <div class="col-xs-12 col-sm-8 col-md-8">
                 <div class="text-h5 text-weight-bold q-pb-sm">
                   Welcome, John Doe
                 </div>
@@ -23,14 +23,18 @@
                   size="sm"
                 ></q-btn>
               </div>
-              <div class="col-xs-4">
-                <q-img src="~assets/welcom.png"></q-img>
+              <div class="col-sm-4" v-show="!$q.screen.lt.sm">
+                <q-img contain src="~assets/welcom.png"></q-img>
               </div>
             </div>
           </q-card-section>
         </q-card>
       </div>
-      <div class="col-xs-3" v-for="(dash, index) in dashes" :key="index">
+      <div
+        class="col-xs-12 col-sm-6 col-md-3"
+        v-for="(dash, index) in dashes"
+        :key="index"
+      >
         <q-card
           class="mycard text-white q-pa-sm"
           :style="{ background: dash.bg }"
@@ -38,7 +42,9 @@
           <div class="row items-center">
             <div class="col">
               <q-card-section>
-                <div class="text-h5">{{ dash.title }}</div></q-card-section
+                <div class="text-weight-medium text-h5 dash-title text-sm-h6">
+                  {{ dash.title }}
+                </div></q-card-section
               >
 
               <q-card-section>
@@ -48,7 +54,11 @@
 
             <div class="col">
               <q-card-section>
-                <q-icon :name="dash.icon" size="xl" class="full-width"></q-icon>
+                <q-icon
+                  :name="dash.icon"
+                  :size="$q.screen.gt.sm ? 'xl' : 'md'"
+                  class="full-width"
+                ></q-icon>
               </q-card-section>
             </div>
           </div>
@@ -301,5 +311,12 @@ export default defineComponent({
 
 .jumbotron-2 {
   background-color: $deep-purple-8;
+}
+
+.dash-title {
+  width: 170px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>

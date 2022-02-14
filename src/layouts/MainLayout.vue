@@ -29,6 +29,7 @@
           :class="[
             searchClosed ? 'closed q-mr-xs-lg q-mr-sm-none' : 'full-width',
           ]"
+          v-if="$q.screen.gt.sm"
           :style="[
             searchClosed
               ? {}
@@ -56,14 +57,15 @@
 
         <!-- responsive search field -->
         <!-- <q-btn icon="search" flat dense round class=""> -->
-        <!-- <div class="cursor-pointer" v-else>
+        <div class="cursor-pointer" v-else>
           <q-btn icon="search" flat dense>
             <q-popup-edit
-              style="max-width: 500px"
+              style="max-width: 100%"
               v-model="searchText"
-              anchor="center start"
+              anchor="center middle"
+              self="center middle"
               fit
-              class=""
+              class="full-width q-mr-md"
               auto-save
               v-slot="scope"
             >
@@ -75,7 +77,7 @@
               />
             </q-popup-edit>
           </q-btn>
-        </div> -->
+        </div>
         <!-- </q-btn> -->
 
         <q-space v-if="$q.screen.gt.sm"></q-space>
@@ -114,7 +116,7 @@
           bg-color="transparent"
           borderless
           hide-dropdown-icon
-          class="q-mr-sm"
+          class="q-mr-md"
         >
           <template #prepend>
             <q-icon
@@ -136,8 +138,8 @@
         </q-select>
 
         <!-- profile -->
-        <q-btn flat dense :ripple="false" push class="">
-          <q-avatar class="q-mx-sm">
+        <q-btn round :ripple="false" push class="q-ml-md-md q-ml-sm-md q-mr-sm">
+          <q-avatar>
             <img src="https://cdn.quasar.dev/img/avatar.png" />
           </q-avatar>
 
