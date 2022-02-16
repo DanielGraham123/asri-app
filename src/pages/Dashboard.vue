@@ -118,32 +118,33 @@
             </q-td>
             <q-td key="date" :props="props">
               <q-item>
-                {{ cleanDate(props.row.date) }}
+                <q-item-section>{{ cleanDate(props.row.date) }}</q-item-section>
               </q-item>
             </q-td>
-            <q-td key="carbs" :props="props">
-              <q-badge color="orange">
-                {{ props.row.carbs }}
+            <q-td key="type" :props="props">
+              <q-badge
+                rounded
+                outlined
+                :color="props.row.type.color"
+                :label="props.row.type.name"
+              >
               </q-badge>
             </q-td>
-            <q-td key="protein" :props="props">
-              <q-badge color="primary">
-                {{ props.row.protein }}
-              </q-badge>
+            <q-td key="clinic" :props="props">
+              <q-item>
+                <q-item-section>{{ props.row.clinic }}</q-item-section>
+              </q-item>
             </q-td>
-            <q-td key="sodium" :props="props">
-              <q-badge color="teal">
-                {{ props.row.sodium }}
-              </q-badge>
+            <q-td key="ref" :props="props">
+              <q-item>
+                <q-item-section class="text-grey">{{
+                  props.row.ref
+                }}</q-item-section>
+              </q-item>
             </q-td>
-            <q-td key="calcium" :props="props">
-              <q-badge color="accent">
-                {{ props.row.calcium }}
-              </q-badge>
-            </q-td>
-            <q-td key="iron" :props="props">
-              <q-badge color="amber">
-                {{ props.row.iron }}
+            <q-td key="status" :props="props">
+              <q-badge :color="props.row.status.color" transparent>
+                {{ props.row.status.name }}
               </q-badge>
             </q-td>
           </q-tr>
@@ -176,22 +177,36 @@ const columns = [
     sortable: true,
     headerStyle: "padding-left: 2rem !important",
   },
-  { name: "carbs", label: "Carbs (g)", field: "carbs" },
-  { name: "protein", label: "Protein (g)", field: "protein" },
-  { name: "sodium", label: "Sodium (mg)", field: "sodium" },
   {
-    name: "calcium",
-    label: "Calcium (%)",
-    field: "calcium",
+    name: "type",
+    label: "Type",
+    field: (row) => row.type.name,
+    align: "left",
     sortable: true,
-    sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
   },
   {
-    name: "iron",
-    label: "Iron (%)",
-    field: "iron",
+    name: "clinic",
+    label: "Clinic",
+    field: "clinic",
+    align: "left",
     sortable: true,
-    sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
+    headerStyle: "padding-left: 2rem !important",
+  },
+  {
+    name: "ref",
+    label: "Ref",
+    field: "ref",
+    align: "left",
+    sortable: true,
+    headerStyle: "padding-left: 2rem !important",
+  },
+  {
+    name: "status",
+    label: "Status",
+    field: "status",
+    align: "left",
+    sortable: true,
+    headerStyle: "padding-left: 2rem !important",
   },
 ];
 
@@ -202,11 +217,16 @@ const rows = [
       img: "https://cdn.quasar.dev/img/avatar.png",
     },
     date: 1613407308000,
-    carbs: 24,
-    protein: 4.0,
-    sodium: 87,
-    calcium: "14%",
-    iron: "1%",
+    type: {
+      name: "In-house",
+      color: "cyan-5",
+    },
+    clinic: "Central Hospital of Yaoundé",
+    ref: "9283928AF12",
+    status: {
+      name: "Due",
+      color: "red",
+    },
   },
   {
     patient: {
@@ -214,11 +234,16 @@ const rows = [
       img: "https://cdn.quasar.dev/img/avatar.png",
     },
     date: 1620909708000,
-    carbs: 37,
-    protein: 4.3,
-    sodium: 129,
-    calcium: "8%",
-    iron: "1%",
+    type: {
+      name: "In-house",
+      color: "cyan-5",
+    },
+    clinic: "Central Hospital of Yaoundé",
+    ref: "9283928AF12",
+    status: {
+      name: "Due",
+      color: "red",
+    },
   },
   {
     patient: {
@@ -226,11 +251,16 @@ const rows = [
       img: "https://cdn.quasar.dev/img/avatar.png",
     },
     date: 1615545708000,
-    carbs: 23,
-    protein: 6.0,
-    sodium: 337,
-    calcium: "6%",
-    iron: "7%",
+    type: {
+      name: "Emergency",
+      color: "negative",
+    },
+    clinic: "Yaoundé General Hospital",
+    ref: "9283928AF12",
+    status: {
+      name: "Upcoming",
+      color: "light-blue-6",
+    },
   },
   {
     patient: {
@@ -238,11 +268,16 @@ const rows = [
       img: "https://cdn.quasar.dev/img/avatar.png",
     },
     date: 1634636508000,
-    carbs: 67,
-    protein: 4.3,
-    sodium: 413,
-    calcium: "3%",
-    iron: "8%",
+    type: {
+      name: "Medical",
+      color: "deep-purple-6",
+    },
+    clinic: "Yaoundé General Hospital",
+    ref: "9283928AF12",
+    status: {
+      name: "Completed",
+      color: "green-13",
+    },
   },
   {
     patient: {
@@ -250,11 +285,16 @@ const rows = [
       img: "https://cdn.quasar.dev/img/avatar.png",
     },
     date: 1635867708000,
-    carbs: 49,
-    protein: 3.9,
-    sodium: 327,
-    calcium: "7%",
-    iron: "16%",
+    type: {
+      name: "Medical",
+      color: "deep-purple-6",
+    },
+    clinic: "Baptist Hospital",
+    ref: "9283928AF12",
+    status: {
+      name: "Upcoming",
+      color: "light-blue-6",
+    },
   },
   {
     patient: {
@@ -262,11 +302,16 @@ const rows = [
       img: "https://cdn.quasar.dev/img/avatar.png",
     },
     date: 1640183448000,
-    carbs: 94,
-    protein: 0.0,
-    sodium: 50,
-    calcium: "0%",
-    iron: "0%",
+    type: {
+      name: "Medical",
+      color: "deep-purple-6",
+    },
+    clinic: "Baptist Hospital",
+    ref: "9283928AF12",
+    status: {
+      name: "Postponed",
+      color: "amber-7",
+    },
   },
   {
     patient: {
@@ -274,11 +319,16 @@ const rows = [
       img: "https://cdn.quasar.dev/img/avatar.png",
     },
     date: 1641133848000,
-    carbs: 98,
-    protein: 0,
-    sodium: 38,
-    calcium: "0%",
-    iron: "2%",
+    type: {
+      name: "In-house",
+      color: "cyan-5",
+    },
+    clinic: "Laquintinie Hospital",
+    ref: "9283928AF12",
+    status: {
+      name: "Postponed",
+      color: "amber-7",
+    },
   },
   {
     patient: {
@@ -286,11 +336,16 @@ const rows = [
       img: "https://cdn.quasar.dev/img/avatar.png",
     },
     date: 1641385848000,
-    carbs: 87,
-    protein: 6.5,
-    sodium: 562,
-    calcium: "0%",
-    iron: "45%",
+    type: {
+      name: "Emergency",
+      color: "negative",
+    },
+    clinic: "Laquintinie Hospital",
+    ref: "9283928AF12",
+    status: {
+      name: "Upcoming",
+      color: "light-blue-6",
+    },
   },
   {
     patient: {
@@ -298,11 +353,16 @@ const rows = [
       img: "https://cdn.quasar.dev/img/avatar.png",
     },
     date: 1641810648000,
-    carbs: 51,
-    protein: 4.9,
-    sodium: 326,
-    calcium: "2%",
-    iron: "22%",
+    type: {
+      name: "Emergency",
+      color: "negative",
+    },
+    clinic: "Laquintinie Hospital",
+    ref: "9283928AF12",
+    status: {
+      name: "Completed",
+      color: "green-13",
+    },
   },
   {
     patient: {
@@ -310,11 +370,13 @@ const rows = [
       img: "https://cdn.quasar.dev/img/avatar.png",
     },
     date: 1644750048000,
-    carbs: 65,
-    protein: 7,
-    sodium: 54,
-    calcium: "12%",
-    iron: "6%",
+    type: { name: "Medical", color: "deep-purple-6" },
+    clinic: "Yaoundé General Hospital",
+    ref: "9283928AF12",
+    status: {
+      name: "Due",
+      color: "red",
+    },
   },
 ];
 
@@ -339,9 +401,9 @@ export default defineComponent({
         "fat",
         "carbs",
         "protein",
-        "sodium",
-        "calcium",
-        "iron",
+        "clinic",
+        "ref",
+        "status",
       ]),
 
       columns,
