@@ -73,21 +73,53 @@
         :rows="rows"
         :columns="columns"
         row-key="name"
+        :table-header-style="{
+          textTransform: 'uppercase',
+          color: 'grey',
+        }"
+        :filter="filter"
+        :grid="$q.screen.lt.md"
       >
+        <template v-slot:top>
+          <div>
+            <div class="text-h5">All Appointments</div>
+            <div class="text-subtitle3">Appointments for 2021</div>
+          </div>
+
+          <q-space></q-space>
+
+          <q-input
+            borderless
+            dense
+            debounce="300"
+            v-model="filter"
+            placeholder="Search"
+          >
+            <template v-slot:append>
+              <q-icon name="search" />
+            </template>
+          </q-input>
+        </template>
+
         <template v-slot:body="props">
           <q-tr :props="props">
-            <q-td key="name" :props="props">
-              {{ props.row.name }}
+            <q-td key="patient" :props="props">
+              <q-item dense>
+                <q-item-section side>
+                  <q-avatar>
+                    <img :src="props.row.patient.img" />
+                  </q-avatar>
+                </q-item-section>
+
+                <q-item-section>
+                  <q-item-label>{{ props.row.patient.name }}</q-item-label>
+                </q-item-section>
+              </q-item>
             </q-td>
-            <q-td key="calories" :props="props">
-              <q-badge color="green">
-                {{ props.row.calories }}
-              </q-badge>
-            </q-td>
-            <q-td key="fat" :props="props">
-              <q-badge color="purple">
-                {{ props.row.fat }}
-              </q-badge>
+            <q-td key="date" :props="props">
+              <q-item>
+                {{ cleanDate(props.row.date) }}
+              </q-item>
             </q-td>
             <q-td key="carbs" :props="props">
               <q-badge color="orange">
@@ -122,27 +154,28 @@
 </template>
 
 <script>
-import { defineComponent, watch } from "vue";
+import { defineComponent, watch, ref } from "vue";
 import { useQuasar } from "quasar";
+import { date } from "quasar";
 
 const columns = [
   {
-    name: "name",
-    required: true,
-    label: "Dessert (100g serving)",
+    name: "patient",
     align: "left",
-    field: (row) => row.name,
-    format: (val) => `${val}`,
+    label: "Patient",
+    field: (row) => row.patient.name,
     sortable: true,
+    headerStyle: "padding-left: 2rem !important",
   },
   {
-    name: "calories",
-    align: "center",
-    label: "Calories",
-    field: "calories",
+    name: "date",
+    label: "Date",
+    field: "date",
+    align: "left",
+    sort: (a, b, rowA, rowB) => new Date(rowB.date) - new Date(rowA.date),
     sortable: true,
+    headerStyle: "padding-left: 2rem !important",
   },
-  { name: "fat", label: "Fat (g)", field: "fat", sortable: true },
   { name: "carbs", label: "Carbs (g)", field: "carbs" },
   { name: "protein", label: "Protein (g)", field: "protein" },
   { name: "sodium", label: "Sodium (mg)", field: "sodium" },
@@ -164,9 +197,11 @@ const columns = [
 
 const rows = [
   {
-    name: "Frozen Yogurt",
-    calories: 159,
-    fat: 6.0,
+    patient: {
+      name: "Frozen Yogurt",
+      img: "https://cdn.quasar.dev/img/avatar.png",
+    },
+    date: 1613407308000,
     carbs: 24,
     protein: 4.0,
     sodium: 87,
@@ -174,9 +209,11 @@ const rows = [
     iron: "1%",
   },
   {
-    name: "Ice cream sandwich",
-    calories: 237,
-    fat: 9.0,
+    patient: {
+      name: "Ice cream sandwich",
+      img: "https://cdn.quasar.dev/img/avatar.png",
+    },
+    date: 1620909708000,
     carbs: 37,
     protein: 4.3,
     sodium: 129,
@@ -184,9 +221,11 @@ const rows = [
     iron: "1%",
   },
   {
-    name: "Eclair",
-    calories: 262,
-    fat: 16.0,
+    patient: {
+      name: "Eclair",
+      img: "https://cdn.quasar.dev/img/avatar.png",
+    },
+    date: 1615545708000,
     carbs: 23,
     protein: 6.0,
     sodium: 337,
@@ -194,9 +233,11 @@ const rows = [
     iron: "7%",
   },
   {
-    name: "Cupcake",
-    calories: 305,
-    fat: 3.7,
+    patient: {
+      name: "Cupcake",
+      img: "https://cdn.quasar.dev/img/avatar.png",
+    },
+    date: 1634636508000,
     carbs: 67,
     protein: 4.3,
     sodium: 413,
@@ -204,9 +245,11 @@ const rows = [
     iron: "8%",
   },
   {
-    name: "Gingerbread",
-    calories: 356,
-    fat: 16.0,
+    patient: {
+      name: "Gingerbread",
+      img: "https://cdn.quasar.dev/img/avatar.png",
+    },
+    date: 1635867708000,
     carbs: 49,
     protein: 3.9,
     sodium: 327,
@@ -214,9 +257,11 @@ const rows = [
     iron: "16%",
   },
   {
-    name: "Jelly bean",
-    calories: 375,
-    fat: 0.0,
+    patient: {
+      name: "Jelly bean",
+      img: "https://cdn.quasar.dev/img/avatar.png",
+    },
+    date: 1640183448000,
     carbs: 94,
     protein: 0.0,
     sodium: 50,
@@ -224,9 +269,11 @@ const rows = [
     iron: "0%",
   },
   {
-    name: "Lollipop",
-    calories: 392,
-    fat: 0.2,
+    patient: {
+      name: "Lollipop",
+      img: "https://cdn.quasar.dev/img/avatar.png",
+    },
+    date: 1641133848000,
     carbs: 98,
     protein: 0,
     sodium: 38,
@@ -234,9 +281,11 @@ const rows = [
     iron: "2%",
   },
   {
-    name: "Honeycomb",
-    calories: 408,
-    fat: 3.2,
+    patient: {
+      name: "Honeycomb",
+      img: "https://cdn.quasar.dev/img/avatar.png",
+    },
+    date: 1641385848000,
     carbs: 87,
     protein: 6.5,
     sodium: 562,
@@ -244,9 +293,11 @@ const rows = [
     iron: "45%",
   },
   {
-    name: "Donut",
-    calories: 452,
-    fat: 25.0,
+    patient: {
+      name: "Donut",
+      img: "https://cdn.quasar.dev/img/avatar.png",
+    },
+    date: 1641810648000,
     carbs: 51,
     protein: 4.9,
     sodium: 326,
@@ -254,9 +305,11 @@ const rows = [
     iron: "22%",
   },
   {
-    name: "KitKat",
-    calories: 518,
-    fat: 26.0,
+    patient: {
+      name: "KitKat",
+      img: "https://cdn.quasar.dev/img/avatar.png",
+    },
+    date: 1644750048000,
     carbs: 65,
     protein: 7,
     sodium: 54,
@@ -268,6 +321,11 @@ const rows = [
 export default defineComponent({
   setup() {
     const $q = useQuasar();
+
+    const cleanDate = (dateVal) => {
+      return date.formatDate(dateVal, "MMM DD, HH:mm");
+    };
+
     watch(
       () => $q.dark.isActive,
       (val) => {
@@ -275,8 +333,21 @@ export default defineComponent({
       }
     );
     return {
+      visibleColumns: ref([
+        "patients",
+        "desc",
+        "fat",
+        "carbs",
+        "protein",
+        "sodium",
+        "calcium",
+        "iron",
+      ]),
+
       columns,
       rows,
+      cleanDate,
+      filter: ref(""),
     };
   },
   data() {
@@ -296,6 +367,15 @@ export default defineComponent({
         },
       ],
     };
+  },
+
+  computed: {},
+
+  mounted() {
+    console.log(
+      "current date: ",
+      new Date(date.formatDate(1613407308000, "MMM DD, HH:mm")).getTime()
+    );
   },
 });
 </script>
