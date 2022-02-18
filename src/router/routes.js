@@ -12,6 +12,21 @@ const routes = [
     component: () => import("layouts/MainLayout.vue"),
     children: [{ path: "", component: () => import("pages/Dashboard.vue") }],
   },
+  {
+    path: "/patient",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/Patient.vue") }],
+  },
+  {
+    path: "/appointments",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/Appointments.vue") }],
+  },
+  {
+    path: "/settings",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/Settings.vue") }],
+  },
 
   // Always leave this as last one,
   // but you can also remove it

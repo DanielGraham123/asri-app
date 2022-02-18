@@ -23,62 +23,7 @@
 
         <q-space></q-space>
 
-        <!-- search field -->
-        <div
-          class="q-pa-md"
-          :class="[
-            searchClosed ? 'closed q-mr-xs-lg q-mr-sm-none' : 'full-width',
-          ]"
-          v-if="$q.screen.gt.sm"
-          :style="[
-            searchClosed
-              ? {}
-              : { maxWidth: '80%', transition: 'max-width 0.5s' },
-          ]"
-        >
-          <q-input
-            rounded
-            standout="bg-grey-13 black"
-            placeholder="Search"
-            dense
-            @focus="searchClosed = false"
-            @blur="!screen ? (searchClosed = true) : ''"
-            hide-bottom-space
-            v-model="searchText"
-            class="text-negative"
-            bottom-slots
-            :bg-color="searchClosed ? 'transparent' : ''"
-          >
-            <template #prepend>
-              <q-icon name="search" />
-            </template>
-          </q-input>
-        </div>
-
-        <!-- responsive search field -->
-        <!-- <q-btn icon="search" flat dense round class=""> -->
-        <div class="cursor-pointer" v-else>
-          <q-btn icon="search" flat dense>
-            <q-popup-edit
-              style="max-width: 100%"
-              v-model="searchText"
-              anchor="center middle"
-              self="center middle"
-              fit
-              class="full-width q-mr-md"
-              auto-save
-              v-slot="scope"
-            >
-              <q-input
-                v-model="scope.value"
-                dense
-                autofocus
-                @keyup.enter="scope.set"
-              />
-            </q-popup-edit>
-          </q-btn>
-        </div>
-        <!-- </q-btn> -->
+        <SearchAutocomplete />
 
         <q-space v-if="$q.screen.gt.sm"></q-space>
 
@@ -140,7 +85,7 @@
         <!-- profile -->
         <q-btn round :ripple="false" push class="q-ml-md-md q-ml-sm-md q-mr-sm">
           <q-avatar>
-            <img src="https://cdn.quasar.dev/img/avatar.png" />
+            <img src="~assets/John_Doe.png" />
           </q-avatar>
 
           <!-- <div class="text-weight-bold text-">John Doe</div> -->
@@ -218,6 +163,7 @@
       @mouseover="miniState = false"
       @mouseout="miniState = true"
       mini-to-overlay
+      cursor
       :width="270"
       :breakpoint="600"
       class="text-white"
@@ -238,9 +184,9 @@
           </q-item>
 
           <q-item style="border-bottom: 1px dotted grey" class="">
-            <q-item-section avatar>
+            <q-item-section side>
               <q-avatar style="max-width: 52px">
-                <img src="https://cdn.quasar.dev/img/avatar.png" />
+                <img src="~assets/John_Doe.png" />
               </q-avatar>
             </q-item-section>
 
@@ -252,7 +198,14 @@
             >
           </q-item>
 
-          <q-item clickable v-close-popup v-ripple>
+          <q-item
+            clickable
+            v-close-popup
+            v-ripple
+            active-class="bg-transdark"
+            to="/dashboard"
+            exact
+          >
             <q-item-section avatar>
               <q-icon name="dashboard" />
             </q-item-section>
@@ -260,7 +213,14 @@
             <q-item-section> Dashboard </q-item-section>
           </q-item>
 
-          <q-item clickable v-close-popup v-ripple>
+          <q-item
+            clickable
+            v-close-popup
+            v-ripple
+            active-class="bg-transdark"
+            to="/patient"
+            exact
+          >
             <q-item-section avatar>
               <q-icon name="person" />
             </q-item-section>
@@ -268,7 +228,14 @@
             <q-item-section> Patient </q-item-section>
           </q-item>
 
-          <q-item clickable v-close-popup v-ripple>
+          <q-item
+            clickable
+            v-close-popup
+            v-ripple
+            active-class="bg-transdark"
+            to="/appointments"
+            exact
+          >
             <q-item-section avatar>
               <q-icon name="event" />
             </q-item-section>
@@ -276,7 +243,13 @@
             <q-item-section> Appointments </q-item-section>
           </q-item>
 
-          <q-item clickable v-close-popup v-ripple>
+          <q-item
+            clickable
+            v-close-popup
+            v-ripple
+            active-class="bg-transdark"
+            to="/settings"
+          >
             <q-item-section avatar>
               <q-icon name="settings" />
             </q-item-section>
@@ -289,6 +262,7 @@
             v-close-popup
             v-ripple
             class="absolute-bottom q-mb-sm"
+            active-class="bg-transdark"
             to="/"
           >
             <q-item-section avatar>
@@ -304,14 +278,17 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view />
+      <transition name="slide-fade" appear :duration="300"
+        ><router-view
+      /></transition>
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
-import LangSwitcher from "components/LanguageSwitcher.vue";
 import { useQuasar } from "quasar";
+import LangSwitcher from "components/LanguageSwitcher.vue";
+import SearchAutocomplete from "components/SearchAutocomplete.vue";
 
 const translateOptions = [
   { label: "English", value: "en-US", country: "United States", flag: "us" },
@@ -321,7 +298,6 @@ const translateOptions = [
 import { defineComponent, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { watch } from "vue";
-import Vue2Filters from "vue2-filters";
 
 export default defineComponent({
   name: "MainLayout",
@@ -330,6 +306,7 @@ export default defineComponent({
 
   components: {
     LangSwitcher,
+    SearchAutocomplete,
   },
 
   setup() {
@@ -408,6 +385,10 @@ export default defineComponent({
   filter: grayscale(100%);
 }
 
+.bg-transdark {
+  background-color: #0b081280;
+}
+
 .side-bg::before {
   content: "";
   position: absolute;
@@ -435,5 +416,18 @@ export default defineComponent({
 }
 .closed {
   max-width: 8.4% !important;
+}
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
 }
 </style>

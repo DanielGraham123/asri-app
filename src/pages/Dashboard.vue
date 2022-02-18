@@ -21,6 +21,8 @@
                   color="orange"
                   icon-right="arrow_right_alt"
                   size="sm"
+                  class="absolute-bottom q-px-xs q-mx-md q-mb-lg"
+                  style="width: 115px"
                 ></q-btn>
               </div>
               <div class="col-sm-4" v-show="!$q.screen.lt.sm">
@@ -40,7 +42,7 @@
           :style="{ background: dash.bg }"
         >
           <div class="row items-center">
-            <div class="col">
+            <div class="col-8">
               <q-card-section>
                 <div class="text-weight-medium text-h5 dash-title text-sm-h6">
                   {{ dash.title }}
@@ -52,12 +54,13 @@
               </q-card-section>
             </div>
 
-            <div class="col">
+            <div class="col-4">
               <q-card-section>
                 <q-icon
                   :name="dash.icon"
                   :size="$q.screen.gt.sm ? 'xl' : 'md'"
                   class="full-width"
+                  :class="$q.screen.lt.sm ? 'on-right' : ''"
                 ></q-icon>
               </q-card-section>
             </div>
@@ -78,7 +81,6 @@
           color: 'grey',
         }"
         :filter="filter"
-        :grid="$q.screen.lt.md"
       >
         <template v-slot:top>
           <div>
@@ -94,11 +96,33 @@
             debounce="300"
             v-model="filter"
             placeholder="Search"
+            :class="[$q.screen.lt.sm ? 'full-width' : '']"
           >
             <template v-slot:append>
               <q-icon name="search" />
             </template>
           </q-input>
+        </template>
+
+        <template v-slot:item="props">
+          <div class="col-xs-12 col-sm-6 col-md-4">
+            <q-card class="flex flex-left items-center">
+              <q-card-section class="">
+                <q-avatar>
+                  <img :src="props.row.patient.img" />
+                </q-avatar>
+              </q-card-section>
+
+              <q-card-section class="truncate-patient">
+                <div>{{ props.row.patient.name }}</div>
+                <div class="te">{{ cleanDate(props.row.date) }}</div>
+              </q-card-section>
+
+              <q-card-section> </q-card-section>
+
+              <q-separator />
+            </q-card>
+          </div>
         </template>
 
         <template v-slot:body="props">
@@ -203,10 +227,9 @@ const columns = [
   {
     name: "status",
     label: "Status",
-    field: "status",
+    field: (row) => row.status.name,
     align: "left",
     sortable: true,
-    headerStyle: "padding-left: 2rem !important",
   },
 ];
 
@@ -457,6 +480,13 @@ export default defineComponent({
 
 .dash-title {
   width: 170px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.truncate-patient {
+  width: 100px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

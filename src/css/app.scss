@@ -26,6 +26,14 @@ body.body--dark {
   background: #000;
 }
 
+#search-field .q-field--filled.q-field--rounded .q-field__control {
+  border-radius: 28px 28px 28px 28px !important;
+}
+
+#mobile-search.q-popup-edit {
+  padding: 8px 0px !important;
+}
+
 /***********************
 * DARK AND LIGHT MODES *
 ************************/
