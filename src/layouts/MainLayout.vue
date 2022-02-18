@@ -219,7 +219,6 @@
             v-ripple
             active-class="bg-transdark"
             to="/patient"
-            exact
           >
             <q-item-section avatar>
               <q-icon name="person" />

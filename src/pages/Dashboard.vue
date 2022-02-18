@@ -1,6 +1,6 @@
 <template>
   <q-page
-    class="q-px-lg q-py-lg"
+    class="q-pa-lg"
     :class="[$q.dark.mode ? 'bg-dark-body' : 'bg-grey-2']"
   >
     <div class="row q-col-gutter-md q-col-gutter-sm-sm items-end">
