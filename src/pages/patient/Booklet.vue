@@ -1,8 +1,15 @@
 <template>
   <q-page class="q-pa-lg">
-    <q-breadcrumbs class="text-grey">
+    <q-breadcrumbs
+      class="text-grey"
+      :active-color="$q.dark.mode ? 'info' : 'primary'"
+    >
       <template v-slot:separator>
-        <q-icon size="1.5em" name="chevron_right" color="primary" />
+        <q-icon
+          size="1.5em"
+          name="chevron_right"
+          :color="$q.dark.mode ? 'info' : 'primary'"
+        />
       </template>
 
       <q-breadcrumbs-el

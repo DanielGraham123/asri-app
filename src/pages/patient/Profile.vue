@@ -1,8 +1,15 @@
 <template>
   <q-page class="q-pa-lg">
-    <q-breadcrumbs class="text-grey-8">
+    <q-breadcrumbs
+      class="text-grey-8"
+      :active-color="$q.dark.mode ? 'info' : 'primary'"
+    >
       <template v-slot:separator>
-        <q-icon size="1.5em" name="chevron_right" color="primary" />
+        <q-icon
+          size="1.5em"
+          name="chevron_right"
+          :color="$q.dark.mode ? 'info' : 'primary'"
+        />
       </template>
 
       <q-breadcrumbs-el
@@ -17,13 +24,28 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
+import { useStore } from "vuex";
 
 export default defineComponent({
   setup() {
+    const $store = useStore();
+
+    const patientProfile = $store.state.patient.profileToOpen;
+
     return {
-      patientName: "John Doe",
+      patientProfile,
+      patientName: patientProfile.patient.name,
+      patient() {
+        console.log("patient: ", patientProfile);
+      },
     };
+
+    patient();
+  },
+
+  mounted() {
+    // console.log("patient: ", this.patientProfile);
   },
 });
 </script>
