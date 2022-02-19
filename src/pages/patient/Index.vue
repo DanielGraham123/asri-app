@@ -1,5 +1,8 @@
 <template>
-  <q-page class="q-pa-lg">
+  <q-page
+    class="q-pa-lg"
+    :class="[$q.dark.mode ? 'bg-dark-body' : 'bg-grey-2']"
+  >
     <div class="row justify-between">
       <q-breadcrumbs
         class="text-grey"

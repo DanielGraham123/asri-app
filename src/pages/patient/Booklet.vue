@@ -1,5 +1,8 @@
 <template>
-  <q-page class="q-pa-lg">
+  <q-page
+    class="q-pa-lg"
+    :class="[$q.dark.mode ? 'bg-dark-body' : 'bg-grey-2']"
+  >
     <q-breadcrumbs
       class="text-grey"
       :active-color="$q.dark.mode ? 'info' : 'primary'"
@@ -29,9 +32,12 @@
 
 <script>
 import { defineComponent } from "vue";
+import { useQuasar } from "quasar";
 
 export default defineComponent({
   setup() {
+    const $q = useQuasar();
+
     return {
       patientName: "John Doe",
     };

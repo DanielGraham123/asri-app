@@ -2,7 +2,7 @@
   "rows": [
     {
       "patient": {
-        "name": "Frozen Yogurt",
+        "name": "Frozen Yogurt Lorem ipsum dolor.",
         "img": "https://cdn.quasar.dev/img/avatar.png"
       },
       "address": "Mbog Abang",
@@ -10,11 +10,15 @@
       "phone": "+237 675 384 383",
       "lastvisit": 1613407308000,
       "lasttreatment": "Prostrate Cancer",
-      "gender": "Maie"
+      "gender": "Maie",
+      "visits": 10,
+      "dob": "19/03/1992",
+      "lastdoctor": "Dr. Jonas",
+      "lasthospital": "Hopital Centrale"
     },
     {
       "patient": {
-        "name": "Ice cream sandwich",
+        "name": "Ice cream sandwich ipsum dolor",
         "img": "https://cdn.quasar.dev/img/avatar.png"
       },
       "address": "Carrefour Messassi",
@@ -22,7 +26,11 @@
       "phone": "+237 675 384 383",
       "lastvisit": 1620909708000,
       "lasttreatment": "Addison's disease",
-      "gender": "Male"
+      "gender": "Male",
+      "visits": 15,
+      "dob": "19/03/1992",
+      "lastdoctor": "Dr. Jonas",
+      "lasthospital": "Hopital Centrale"
     },
     {
       "patient": {
@@ -34,7 +42,11 @@
       "phone": "+237 651 534 685",
       "lastvisit": 1615545708000,
       "lasttreatment": "Malaria",
-      "gender": "Female"
+      "gender": "Female",
+      "visits": 4,
+      "dob": "19/03/1992",
+      "lastdoctor": "Dr. Jonas",
+      "lasthospital": "Hopital Centrale"
     },
     {
       "patient": {
@@ -46,7 +58,11 @@
       "phone": "+237 651 534 685",
       "lastvisit": 1634636508000,
       "lasttreatment": "Malaria, Typhoid",
-      "gender": "Female"
+      "gender": "Female",
+      "visits": 12,
+      "dob": "19/03/1992",
+      "lastdoctor": "Dr. Jonas",
+      "lasthospital": "Hopital Centrale"
     },
     {
       "patient": {
@@ -58,7 +74,11 @@
       "phone": "+237 224 283 332",
       "lastvisit": 1635867708000,
       "lasttreatment": "Prostrate Cancer",
-      "gender": "Male"
+      "gender": "Male",
+      "visits": 11,
+      "dob": "19/03/1992",
+      "lastdoctor": "Dr. Jonas",
+      "lasthospital": "Hopital Centrale"
     },
     {
       "patient": {
@@ -70,7 +90,11 @@
       "phone": "+237 651 523 013",
       "lastvisit": 1640183448000,
       "lasttreatment": "Food Poisoning",
-      "gender": "Female"
+      "gender": "Female",
+      "visits": 2,
+      "dob": "19/03/1992",
+      "lastdoctor": "Dr. Jonas",
+      "lasthospital": "Hopital Centrale"
     },
     {
       "patient": {
@@ -82,7 +106,11 @@
       "phone": "+237 699 675 848",
       "lastvisit": 1641133848000,
       "lasttreatment": "Headaches",
-      "gender": "Female"
+      "gender": "Female",
+      "visits": 5,
+      "dob": "19/03/1992",
+      "lastdoctor": "Dr. Jonas",
+      "lasthospital": "Hopital Centrale"
     },
     {
       "patient": {
@@ -94,7 +122,11 @@
       "phone": "+237 699 675 848",
       "lastvisit": 1641385848000,
       "lasttreatment": "Obesity",
-      "gender": "Female"
+      "gender": "Female",
+      "visits": 10,
+      "dob": "19/03/1992",
+      "lastdoctor": "Dr. Jonas",
+      "lasthospital": "Hopital Centrale"
     },
     {
       "patient": {
@@ -106,7 +138,11 @@
       "phone": "+237 699 675 848",
       "lastvisit": 1641810648000,
       "lasttreatment": "Pneumonia",
-      "gender": "Male"
+      "gender": "Male",
+      "visits": 1,
+      "dob": "19/03/1992",
+      "lastdoctor": "Dr. Jonas",
+      "lasthospital": "Hopital Centrale"
     },
     {
       "patient": {
@@ -118,7 +154,11 @@
       "phone": "+237 651 534 685",
       "lastvisit": 1644750048000,
       "lasttreatment": "Stroke",
-      "gender": "Maie"
+      "gender": "Maie",
+      "visits": 4,
+      "dob": "19/03/1992",
+      "lastdoctor": "Dr. Jonas",
+      "lasthospital": "Hopital Centrale"
     }
   ]
 }
