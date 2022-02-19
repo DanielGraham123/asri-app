@@ -62,7 +62,7 @@
           </div>
 
           <div class="col-8 profile-info">
-            <q-card square class="shadow-1 q-ml-xs">
+            <q-card square class="shadow-1 q-ml-xs" style="height: 290px">
               <div class="row q-px-md q-py-lg">
                 <div class="col-4">
                   <q-card-section>
