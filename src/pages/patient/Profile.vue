@@ -30,7 +30,7 @@
         <div class="row">
           <div class="col-4">
             <q-card
-              class="q-px-md q-pb-md shadow-1 text-center"
+              class="q-px-md q-pb-md no-shadow text-center"
               square
               style="height: 290px"
             >
@@ -62,7 +62,7 @@
           </div>
 
           <div class="col-8 profile-info">
-            <q-card square class="shadow-1 q-ml-xs" style="height: 290px">
+            <q-card square class="no-shadow q-ml-xs" style="height: 290px">
               <div class="row q-px-md q-py-lg">
                 <div class="col-4">
                   <q-card-section>
@@ -115,7 +115,49 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4"></div>
+      <div class="col-md-4 q-pl-md">
+        <!-- Previous Prescription -->
+        <q-card square class="no-shadow">
+          <q-card-section class="flex justify-between items-center q-pb-sm">
+            <div class="text-subtitle1 text-weight-bold">
+              Prev. Prescriptions
+            </div>
+            <a href="/patient/booklet" class="text-primary text-weight-bold"
+              >See all</a
+            >
+          </q-card-section>
+
+          <q-card-section
+            class="q-mx-sm q-mb-sm bg-indigo-1"
+            style="height: 155px; overflow-y: scroll"
+          >
+            <ul class="q-px-md q-my-xs">
+              <li v-for="i in 10" :key="i">
+                Some previous drug/prescription here
+              </li>
+            </ul>
+          </q-card-section>
+
+          <q-card-section class="flex items-end justify-between">
+            <div>
+              <div class="text-subtitle2">Previously checked by:</div>
+              <div class="flex items-center">
+                <q-icon name="person_outline" color="secondary"></q-icon>
+                <div class="text-subtitle3 text-grey q-ml-sm">
+                  {{ patientProfile.lastdoctor }}
+                </div>
+              </div>
+            </div>
+
+            <div class="text-grey text-subtitle3">
+              <span class="text-secondary">On: </span>
+              {{ cleanDate(patientProfile.lastvisit) }}
+            </div>
+          </q-card-section>
+        </q-card>
+
+        <!-- Files / Documents -->
+      </div>
     </div>
   </q-page>
 </template>
