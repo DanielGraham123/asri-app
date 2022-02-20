@@ -31,10 +31,17 @@
           icon="print"
           unelevated
           size="sm"
-          class="q-mr-sm no-shadow bg-white text-grey text-weight-bold"
+          :outline="$q.dark.mode"
+          class="q-mr-sm no-shadow text-grey text-weight-bold"
+          :class="$q.dark.mode ? '' : 'bg-white'"
         ></q-btn>
 
-        <q-btn unelevated class="bg-white text-grey text-weight-bold no-shadow">
+        <q-btn
+          unelevated
+          :outline="$q.dark.mode"
+          :class="$q.dark.mode ? '' : 'bg-white'"
+          class="text-grey text-weight-bold no-shadow"
+        >
           <q-icon left name="fas fa-edit" size="12px"></q-icon>
           <div>Edit Patient</div>
         </q-btn>
@@ -138,13 +145,17 @@
             <div class="text-subtitle1 text-weight-bold">
               Prev. Prescriptions
             </div>
-            <a href="/patient/booklet" class="text-primary text-weight-bold"
+            <a
+              href="/patient/booklet"
+              :class="[$q.dark.mode ? 'text-blue-12' : 'text-primary']"
+              class="text-weight-bold"
               >See all</a
             >
           </q-card-section>
 
           <q-card-section
-            class="q-mx-sm q-mb-sm bg-indigo-1"
+            class="q-mx-sm q-mb-sm"
+            :class="[$q.dark.mode ? 'bg-blue-grey-10' : 'bg-indigo-1']"
             style="height: 155px; overflow-y: scroll"
           >
             <ul class="q-px-md q-my-xs">
@@ -158,7 +169,10 @@
             <div>
               <div class="text-subtitle2">Previously checked by:</div>
               <div class="flex items-center">
-                <q-icon name="person_outline" color="secondary"></q-icon>
+                <q-icon
+                  name="person_outline"
+                  :color="$q.dark.mode ? 'blue-12' : 'secondary'"
+                ></q-icon>
                 <div class="text-subtitle3 text-grey q-ml-sm">
                   {{ patientProfile.lastdoctor }}
                 </div>
@@ -166,7 +180,9 @@
             </div>
 
             <div class="text-grey text-subtitle3">
-              <span class="text-secondary">On: </span>
+              <span :class="$q.dark.mode ? 'text-blue-12' : 'text-secondary'"
+                >On:
+              </span>
               {{ cleanDate(patientProfile.lastvisit) }}
             </div>
           </q-card-section>
