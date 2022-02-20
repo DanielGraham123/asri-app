@@ -5,13 +5,13 @@
   >
     <q-breadcrumbs
       class="text-grey"
-      :active-color="$q.dark.mode ? 'info' : 'primary'"
+      :active-color="$q.dark.mode ? 'blue-12' : 'primary'"
     >
       <template v-slot:separator>
         <q-icon
           size="1.5em"
           name="chevron_right"
-          :color="$q.dark.mode ? 'info' : 'primary'"
+          :color="$q.dark.mode ? 'blue-12' : 'primary'"
         />
       </template>
 
