@@ -3,27 +3,43 @@
     class="q-pa-lg"
     :class="[$q.dark.mode ? 'bg-dark-body' : 'bg-grey-2']"
   >
-    <q-breadcrumbs
-      class="text-grey-8"
-      :active-color="$q.dark.mode ? 'info' : 'primary'"
-    >
-      <template v-slot:separator>
-        <q-icon
-          size="1.5em"
-          name="chevron_right"
-          :color="$q.dark.mode ? 'info' : 'primary'"
+    <div class="flex justify-between items-baseline">
+      <q-breadcrumbs
+        class="text-grey-8"
+        :active-color="$q.dark.mode ? 'info' : 'primary'"
+      >
+        <template v-slot:separator>
+          <q-icon
+            size="1.5em"
+            name="chevron_right"
+            :color="$q.dark.mode ? 'info' : 'primary'"
+          />
+        </template>
+
+        <q-breadcrumbs-el
+          to="/patient"
+          label="Patient"
+          icon="fas fa-user-injured"
         />
-      </template>
 
-      <q-breadcrumbs-el
-        to="/patient"
-        label="Patient"
-        icon="fas fa-user-injured"
-      />
+        <q-breadcrumbs-el :label="patientName" icon="fas fa-user-alt" />
+      </q-breadcrumbs>
 
-      <q-breadcrumbs-el :label="patientName" icon="fas fa-user-alt" />
-    </q-breadcrumbs>
+      <!-- edit patient profile and print -->
+      <div class="flex">
+        <q-btn
+          icon="print"
+          unelevated
+          size="sm"
+          class="q-mr-sm no-shadow bg-white text-grey text-weight-bold"
+        ></q-btn>
 
+        <q-btn unelevated class="bg-white text-grey text-weight-bold no-shadow">
+          <q-icon left name="fas fa-edit" size="12px"></q-icon>
+          <div>Edit Patient</div>
+        </q-btn>
+      </div>
+    </div>
     <!-- Profile Section -->
     <div class="row q-py-md">
       <div class="col-md-8">
@@ -157,6 +173,37 @@
         </q-card>
 
         <!-- Files / Documents -->
+        <q-card square class="no-shadow q-mt-md">
+          <q-card-section class="q-pb-sm">
+            <div class="text-subtitle1 text-weight-bold">Files/Documents</div>
+          </q-card-section>
+
+          <q-card-section class="q-px-md q-pt-xs q-mb-sm">
+            <q-list bordered separator>
+              <q-item v-ripple clickable v-for="i in 5" :key="'file' + i">
+                <q-item-section side>
+                  <q-icon name="description"></q-icon>
+                </q-item-section>
+
+                <q-item-section>
+                  <div class="text-grey">X-Ray result.pdf</div>
+                </q-item-section>
+
+                <q-item-section side>
+                  <div class="flex items-center">
+                    <q-btn
+                      size="sm"
+                      flat
+                      dense
+                      round
+                      icon="download_for_offline"
+                    ></q-btn>
+                  </div>
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-card-section>
+        </q-card>
       </div>
     </div>
   </q-page>
