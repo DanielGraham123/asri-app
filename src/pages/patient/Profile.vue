@@ -49,7 +49,8 @@
     </div>
     <!-- Profile Section -->
     <div class="row q-py-md">
-      <div class="col-md-8">
+      <div class="col-md-8 q-gutter-y-md">
+        <!-- Profile details -->
         <div class="row">
           <div class="col-4">
             <q-card
@@ -137,8 +138,56 @@
             </q-card>
           </div>
         </div>
+
+        <!-- Misc Patient Appointments -->
+        <q-card square class="no-shadow">
+          <q-card-section class="q-pb-none q-pt-lg">
+            <q-tabs
+              v-model="tab"
+              dense
+              style="border-radius: 5px; width: 520px"
+              class="text-grey text-weight-bold q-pa-xs"
+              :class="$q.dark.mode ? 'bg-blue-grey-10' : 'bg-indigo-1'"
+              active-bg-color="white"
+              active-color="secondary"
+              indicator-color="transparent"
+              align="left"
+              no-caps
+            >
+              <q-tab name="upcoming-apptmnts" label="Upcoming Appointments" />
+              <q-tab name="past-apptmnts" label="Past Appointments" />
+              <q-tab name="medical-records" label="Medical Records" />
+            </q-tabs>
+          </q-card-section>
+
+          <q-card-section class="q-px-sm q-py-md">
+            <q-tab-panels
+              v-model="tab"
+              :class="$q.dark.mode ? 'bg-blue-grey-10' : 'bg-indigo-1'"
+              class="q-mx-sm"
+              animated
+            >
+              <q-tab-panel name="upcoming-apptmnts">
+                <div class="text-h6">Upcoming Appointments</div>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              </q-tab-panel>
+
+              <q-tab-panel name="past-apptmnts">
+                <div class="text-h6">Past Appointments</div>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              </q-tab-panel>
+
+              <q-tab-panel name="medical-records">
+                <div class="text-h6">Medical Records</div>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              </q-tab-panel>
+            </q-tab-panels>
+          </q-card-section>
+        </q-card>
       </div>
-      <div class="col-md-4 q-pl-md">
+
+      <!-- side section -->
+      <div class="col-md-4 q-pl-md q-gutter-y-md">
         <!-- Previous Prescription -->
         <q-card square class="no-shadow">
           <q-card-section class="flex justify-between items-center q-pb-sm">
@@ -189,7 +238,7 @@
         </q-card>
 
         <!-- Files / Documents -->
-        <q-card square class="no-shadow q-mt-md">
+        <q-card square class="no-shadow">
           <q-card-section class="q-pb-sm">
             <div class="text-subtitle1 text-weight-bold">Files/Documents</div>
           </q-card-section>
@@ -237,6 +286,8 @@ export default defineComponent({
 
     const patientProfile = $store.state.patient.profileToOpen;
 
+    const tab = ref("upcoming-apptmnts");
+
     const cleanName = (name) => {
       let name_ = name.split(" ");
 
@@ -259,6 +310,7 @@ export default defineComponent({
       patientName: patientProfile.patient.name,
       cleanName,
       cleanDate,
+      tab,
     };
   },
 
