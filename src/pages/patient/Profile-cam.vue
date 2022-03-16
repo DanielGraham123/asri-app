@@ -1,26 +1,12 @@
 <template>
-  <q-page
-    class="q-pa-lg"
-    :class="[$q.dark.mode ? 'bg-dark-body' : 'bg-grey-2']"
-  >
+  <q-page class="q-pa-lg" :class="[$q.dark.mode ? 'bg-dark-body' : 'bg-grey-2']">
     <div class="flex justify-between items-baseline">
-      <q-breadcrumbs
-        class="text-grey-8"
-        :active-color="$q.dark.mode ? 'blue-12' : 'primary'"
-      >
+      <q-breadcrumbs class="text-grey-8" :active-color="$q.dark.mode ? 'blue-12' : 'primary'">
         <template v-slot:separator>
-          <q-icon
-            size="1.5em"
-            name="chevron_right"
-            :color="$q.dark.mode ? 'blue-12' : 'primary'"
-          />
+          <q-icon size="1.5em" name="chevron_right" :color="$q.dark.mode ? 'blue-12' : 'primary'" />
         </template>
 
-        <q-breadcrumbs-el
-          to="/patient"
-          label="Patient"
-          icon="fas fa-user-injured"
-        />
+        <q-breadcrumbs-el to="/patient" label="Patient" icon="fas fa-user-injured" />
 
         <q-breadcrumbs-el :label="patientName" icon="fas fa-user-alt" />
       </q-breadcrumbs>
@@ -53,23 +39,15 @@
         <!-- Profile details -->
         <div class="row">
           <div class="col-4">
-            <q-card
-              class="q-px-md q-pb-md no-shadow text-center"
-              square
-              style="height: 290px"
-            >
+            <q-card class="q-px-md q-pb-md no-shadow text-center" square style="height: 290px">
               <q-card-section class="q-pb-sm">
                 <q-avatar size="80px">
-                  <img :src="patientProfile.patient.img" alt="" />
+                  <img :src="patientProfile.patient.img" alt />
                 </q-avatar>
 
-                <div class="text-h6 q-px-md q-pt-sm">
-                  {{ cleanName(patientProfile.patient.name) }}
-                </div>
+                <div class="text-h6 q-px-md q-pt-sm">{{ cleanName(patientProfile.patient.name) }}</div>
 
-                <div class="text-subtitle3 text-grey">
-                  {{ patientProfile.phone }}
-                </div>
+                <div class="text-subtitle3 text-grey">{{ patientProfile.phone }}</div>
               </q-card-section>
 
               <q-card-section class="q-pt-none">
@@ -78,9 +56,7 @@
               </q-card-section>
 
               <q-card-action class="q-mb-md">
-                <q-btn size="md" outline class="full-width text-capitalize"
-                  >Send Message</q-btn
-                >
+                <q-btn size="md" outline class="full-width text-capitalize">Send Message</q-btn>
               </q-card-action>
             </q-card>
           </div>
@@ -91,47 +67,43 @@
                 <div class="col-4">
                   <q-card-section>
                     <div class="text-grey">Full Name:</div>
-                    <div class="">{{ patientProfile.patient.name }}</div>
+                    <div class>{{ patientProfile.patient.name }}</div>
                   </q-card-section>
                   <q-card-section>
                     <div class="text-grey">Gender:</div>
-                    <div class="">{{ patientProfile.gender }}</div>
+                    <div class>{{ patientProfile.gender }}</div>
                   </q-card-section>
                   <q-card-section>
                     <div class="text-grey">Last Visit:</div>
-                    <div class="">
-                      {{ cleanDate(patientProfile.lastvisit) }}
-                    </div>
+                    <div class>{{ cleanDate(patientProfile.lastvisit) }}</div>
                   </q-card-section>
                 </div>
                 <div class="col-4">
                   <q-card-section>
                     <div class="text-grey">Birthday:</div>
-                    <div class="">{{ patientProfile.dob }}</div>
+                    <div class>{{ patientProfile.dob }}</div>
                   </q-card-section>
                   <q-card-section>
                     <div class="text-grey">Phone:</div>
-                    <div class="">{{ patientProfile.phone }}</div>
+                    <div class>{{ patientProfile.phone }}</div>
                   </q-card-section>
                   <q-card-section>
                     <div class="text-grey">Last Doctor:</div>
-                    <div class="">{{ patientProfile.lastdoctor }}</div>
+                    <div class>{{ patientProfile.lastdoctor }}</div>
                   </q-card-section>
                 </div>
                 <div class="col-4">
                   <q-card-section>
                     <div class="text-grey">Address:</div>
-                    <div class="">{{ patientProfile.address }}</div>
+                    <div class>{{ patientProfile.address }}</div>
                   </q-card-section>
                   <q-card-section>
                     <div class="text-grey">Last Treatment:</div>
-                    <div class="">
-                      {{ patientProfile.lasttreatment }}
-                    </div>
+                    <div class>{{ patientProfile.lasttreatment }}</div>
                   </q-card-section>
                   <q-card-section>
                     <div class="text-grey">Last Hospital:</div>
-                    <div class="">{{ patientProfile.lasthospital }}</div>
+                    <div class>{{ patientProfile.lasthospital }}</div>
                   </q-card-section>
                 </div>
               </div>
@@ -168,13 +140,11 @@
               animated
             >
               <q-tab-panel name="upcoming-apptmnts">
-                <div class="text-h6">Upcoming Appointments</div>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                <div class="text-h6">Upcoming Appointments</div>Lorem ipsum dolor sit amet consectetur adipisicing elit.
               </q-tab-panel>
 
               <q-tab-panel name="past-apptmnts">
-                <div class="text-h6">Past Appointments</div>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                <div class="text-h6">Past Appointments</div>Lorem ipsum dolor sit amet consectetur adipisicing elit.
               </q-tab-panel>
 
               <q-tab-panel name="medical-records">
@@ -183,11 +153,7 @@
                 <div class="text-center q-pa-md">
                   <q-btn size="md" color="info" to="/patient/booklet">
                     Open in Booklet
-                    <q-icon
-                      name="fas fa-long-arrow-alt-right"
-                      size="15px"
-                      class="q-ml-sm"
-                    ></q-icon>
+                    <q-icon name="fas fa-long-arrow-alt-right" size="15px" class="q-ml-sm"></q-icon>
                   </q-btn>
                 </div>
               </q-tab-panel>
@@ -201,15 +167,12 @@
         <!-- Previous Prescription -->
         <q-card square class="no-shadow">
           <q-card-section class="flex justify-between items-center q-pb-sm">
-            <div class="text-subtitle1 text-weight-bold">
-              Prev. Prescriptions
-            </div>
+            <div class="text-subtitle1 text-weight-bold">Prev. Prescriptions</div>
             <a
               href="/patient/booklet"
               :class="[$q.dark.mode ? 'text-blue-12' : 'text-primary']"
               class="text-weight-bold"
-              >See all</a
-            >
+            >See all</a>
           </q-card-section>
 
           <q-card-section
@@ -218,9 +181,7 @@
             style="height: 155px; overflow-y: scroll"
           >
             <ul class="q-px-md q-my-xs">
-              <li v-for="i in 10" :key="i">
-                Some previous drug/prescription here
-              </li>
+              <li v-for="i in 10" :key="i">Some previous drug/prescription here</li>
             </ul>
           </q-card-section>
 
@@ -228,20 +189,13 @@
             <div>
               <div class="text-subtitle2">Previously checked by:</div>
               <div class="flex items-center">
-                <q-icon
-                  name="person_outline"
-                  :color="$q.dark.mode ? 'blue-12' : 'secondary'"
-                ></q-icon>
-                <div class="text-subtitle3 text-grey q-ml-sm">
-                  {{ patientProfile.lastdoctor }}
-                </div>
+                <q-icon name="person_outline" :color="$q.dark.mode ? 'blue-12' : 'secondary'"></q-icon>
+                <div class="text-subtitle3 text-grey q-ml-sm">{{ patientProfile.lastdoctor }}</div>
               </div>
             </div>
 
             <div class="text-grey text-subtitle3">
-              <span :class="$q.dark.mode ? 'text-blue-12' : 'text-secondary'"
-                >On:
-              </span>
+              <span :class="$q.dark.mode ? 'text-blue-12' : 'text-secondary'">On:</span>
               {{ cleanDate(patientProfile.lastvisit) }}
             </div>
           </q-card-section>
@@ -266,13 +220,7 @@
 
                 <q-item-section side>
                   <div class="flex items-center">
-                    <q-btn
-                      size="sm"
-                      flat
-                      dense
-                      round
-                      icon="download_for_offline"
-                    ></q-btn>
+                    <q-btn size="sm" flat dense round icon="download_for_offline"></q-btn>
                   </div>
                 </q-item-section>
               </q-item>
@@ -285,18 +233,25 @@
 </template>
 
 <script>
-import { defineComponent, computed, onMounted, ref } from "vue";
+import { defineComponent, computed, onMounted, onBeforeMount, ref } from "vue";
 import { useStore } from "vuex";
 import { useQuasar, date } from "quasar";
+import patients from "../../assets/data/patients-list.json";
+import { useRoute } from "vue-router";
+
+const patients_ = patients;
 
 export default defineComponent({
   setup() {
     const $q = useQuasar();
     const $store = useStore();
+    const route = useRoute();
 
     const patientProfile = $store.getters["patient/getPatientProfile"];
 
     const tab = ref("upcoming-apptmnts");
+    let cam_username = "";
+    let cam_user = null;
 
     const cleanName = (name) => {
       let name_ = name.split(" ");
@@ -320,17 +275,32 @@ export default defineComponent({
       );
     });
 
+    onBeforeMount(() => {
+      cam_username = route.params.name;
+
+      patients_.rows.forEach((patient) => {
+        if (patient.patient.name.split(" ")[0].toLowerCase() === cam_username) {
+          console.log("patient details: ", patient);
+          // patientProfile = patient;
+          $store.commit("patient/patientProfile", patient);
+          console.log(
+            "store patient: ",
+            $store.state["patient/patientProfile"]
+          );
+        }
+      });
+
+      console.log("patients_:", patients_.rows);
+      console.log("patient: ", route.params.name);
+    });
+
     return {
       patientProfile,
-      patientName: patientProfile.patient.name,
+      patientName: patientProfile ? patientProfile.patient.name : cam_username,
       cleanName,
       cleanDate,
       tab,
     };
-  },
-
-  mounted() {
-    // console.log("patient: ", this.patientProfile);
   },
 });
 </script>

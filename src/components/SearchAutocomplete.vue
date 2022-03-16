@@ -7,7 +7,7 @@
     :style="[
       searchClosed ? {} : { maxWidth: '80%', transition: 'max-width 0.5s' },
     ]"
-    id=""
+    id
   >
     <!-- <q-input
       rounded
@@ -25,7 +25,7 @@
       <template #prepend>
         <q-icon name="search" />
       </template>
-    </q-input> -->
+    </q-input>-->
     <q-select
       v-model="searchModel"
       clearable
@@ -49,14 +49,14 @@
       </template>
       <template v-slot:no-option>
         <q-item>
-          <q-item-section class="text-grey"> No results </q-item-section>
+          <q-item-section class="text-grey">No results</q-item-section>
         </q-item>
       </template>
       <template v-slot:option="{ opt, itemProps }">
         <q-item v-bind="itemProps">
           <q-item-section side>
             <q-avatar>
-              <img :src="opt.image" alt="" />
+              <img :src="opt.image" alt />
             </q-avatar>
           </q-item-section>
           <q-item-section>
@@ -69,6 +69,10 @@
         </q-item>
       </template>
 
+      <template #append>
+        <q-btn flat size="15px" icon="photo_camera" @click="openCamera()"></q-btn>
+      </template>
+
       <template #selected>
         <q-chip
           v-if="searchModel"
@@ -79,7 +83,7 @@
           class="q-my-none q-ml-xs q-mr-none"
         >
           <q-avatar size="sm">
-            <img :src="searchModel.image" alt="" />
+            <img :src="searchModel.image" alt />
           </q-avatar>
           {{ searchModel.name }}
         </q-chip>
@@ -88,7 +92,7 @@
   </div>
 
   <!-- responsive search field -->
-  <div class="" v-else>
+  <div class v-else>
     <q-btn icon="search" flat dense>
       <q-popup-edit
         style="width: 75%"
@@ -122,7 +126,7 @@
           </template>
           <template v-slot:no-option>
             <q-item>
-              <q-item-section class="text-grey"> No results </q-item-section>
+              <q-item-section class="text-grey">No results</q-item-section>
             </q-item>
           </template>
 
@@ -130,7 +134,7 @@
             <q-item v-bind="scope.itemProps">
               <q-item-section side>
                 <q-avatar>
-                  <img :src="scope.opt.image" alt="" />
+                  <img :src="scope.opt.image" alt />
                 </q-avatar>
               </q-item-section>
               <q-item-section>
@@ -138,9 +142,11 @@
                 <q-item-label caption>{{ scope.opt.date }}</q-item-label>
               </q-item-section>
               <q-item-section side>
-                <q-badge :color="scope.opt.type.color">{{
+                <q-badge :color="scope.opt.type.color">
+                  {{
                   scope.opt.type.name
-                }}</q-badge>
+                  }}
+                </q-badge>
               </q-item-section>
             </q-item>
           </template>
@@ -155,7 +161,7 @@
               class="q-my-none q-ml-xs q-mr-none"
             >
               <q-avatar size="sm">
-                <img :src="searchModel.image" alt="" />
+                <img :src="searchModel.image" alt />
               </q-avatar>
               {{ searchModel.name }}
             </q-chip>
@@ -169,6 +175,8 @@
 <script>
 import { defineComponent, ref, watch } from "vue";
 import { useQuasar, date } from "quasar";
+import { useRoute } from "vue-router";
+import router from "../router/index";
 
 const types = [
   { name: "Medical", color: "deep-purple-6" },
@@ -210,6 +218,7 @@ export default defineComponent({
     const searchClosed = ref("");
 
     const options = ref(stringOptions);
+    const route = useRoute();
 
     const { searchModel } = ref(null);
 
@@ -224,6 +233,10 @@ export default defineComponent({
       searchClosed,
       searchModel,
       options,
+
+      openCamera() {
+        this.$router.push("/cam");
+      },
 
       filterFn(val, update, abort) {
         // call abort() at any time if you can't retrieve data somehow

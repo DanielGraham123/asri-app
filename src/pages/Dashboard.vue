@@ -1,17 +1,12 @@
 <template>
-  <q-page
-    class="q-pa-lg"
-    :class="[$q.dark.mode ? 'bg-dark-body' : 'bg-grey-2']"
-  >
+  <q-page class="q-pa-lg" :class="[$q.dark.mode ? 'bg-dark-body' : 'bg-grey-2']">
     <div class="row q-col-gutter-md q-col-gutter-sm-sm items-end">
       <div class="col-xs-12 col-md-6 q-ml-auto">
         <q-card fit :class="[$q.dark.mode ? 'jumbotron-2' : 'jumbotron']">
           <q-card-section>
             <div class="row q-col-gutter-sm">
               <div class="col-xs-12 col-sm-8 col-md-8">
-                <div class="text-h5 text-weight-bold q-pb-sm">
-                  Welcome, John Doe
-                </div>
+                <div class="text-h5 text-weight-bold q-pb-sm">Welcome, John Doe</div>
                 <div class="text-subtitle3 q-pb-md">
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                   Explicabo minus consequatur ipsum eos.
@@ -32,22 +27,13 @@
           </q-card-section>
         </q-card>
       </div>
-      <div
-        class="col-xs-12 col-sm-6 col-md-3"
-        v-for="(dash, index) in dashes"
-        :key="index"
-      >
-        <q-card
-          class="mycard text-white q-pa-sm"
-          :style="{ background: dash.bg }"
-        >
-          <div class="row items-center">
+      <div class="col-xs-12 col-sm-6 col-md-3" v-for="(dash, index) in dashes" :key="index">
+        <q-card class="mycard text-white q-pa-sm" :style="{ background: dash.bg }">
+          <div class="row items-center q-my-md">
             <div class="col-8">
               <q-card-section>
-                <div class="text-weight-medium text-h5 dash-title text-sm-h6">
-                  {{ dash.title }}
-                </div></q-card-section
-              >
+                <div class="text-weight-medium text-h5 dash-title text-sm-h6">{{ dash.title }}</div>
+              </q-card-section>
 
               <q-card-section>
                 <div class="text-h3 text-weight-bold">{{ dash.count }}</div>
@@ -107,7 +93,7 @@
         <template v-slot:item="props">
           <div class="col-xs-12 col-sm-6 col-md-4">
             <q-card class="flex flex-left items-center">
-              <q-card-section class="">
+              <q-card-section class>
                 <q-avatar>
                   <img :src="props.row.patient.img" />
                 </q-avatar>
@@ -118,7 +104,7 @@
                 <div class="te">{{ cleanDate(props.row.date) }}</div>
               </q-card-section>
 
-              <q-card-section> </q-card-section>
+              <q-card-section></q-card-section>
 
               <q-separator />
             </q-card>
@@ -146,13 +132,7 @@
               </q-item>
             </q-td>
             <q-td key="type" :props="props">
-              <q-badge
-                rounded
-                outlined
-                :color="props.row.type.color"
-                :label="props.row.type.name"
-              >
-              </q-badge>
+              <q-badge rounded outlined :color="props.row.type.color" :label="props.row.type.name"></q-badge>
             </q-td>
             <q-td key="clinic" :props="props">
               <q-item>
@@ -161,15 +141,15 @@
             </q-td>
             <q-td key="ref" :props="props">
               <q-item>
-                <q-item-section class="text-grey">{{
+                <q-item-section class="text-grey">
+                  {{
                   props.row.ref
-                }}</q-item-section>
+                  }}
+                </q-item-section>
               </q-item>
             </q-td>
             <q-td key="status" :props="props">
-              <q-badge :color="props.row.status.color" transparent>
-                {{ props.row.status.name }}
-              </q-badge>
+              <q-badge :color="props.row.status.color" transparent>{{ props.row.status.name }}</q-badge>
             </q-td>
           </q-tr>
         </template>
@@ -301,10 +281,12 @@ export default defineComponent({
 <style lang="scss" scoped>
 .mycard {
   width: 100%;
+  height: 14em;
 }
 
 .jumbotron {
   background-color: $deep-purple-2;
+  height: 14em;
 }
 
 .jumbotron-2 {

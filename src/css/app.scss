@@ -67,6 +67,16 @@ body.body--dark {
   }
 }
 
+.booklet {
+  p {
+    margin: 0;
+  }
+  h1 {
+    font-weight: inherit;
+    line-height: inherit;
+  }
+}
+
 /***********************
 * DARK AND LIGHT MODES *
 ************************/

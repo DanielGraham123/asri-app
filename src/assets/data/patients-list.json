@@ -2,8 +2,8 @@
   "rows": [
     {
       "patient": {
-        "name": "Frozen Yogurt Lorem ipsum dolor.",
-        "img": "https://cdn.quasar.dev/img/avatar.png"
+        "name": "Daniel Boaz",
+        "img": "https://res.cloudinary.com/bilitts/image/upload/v1647436377/user-faces/Daniel_dhuviw.jpg"
       },
       "address": "Mbog Abang",
       "age": 28,
@@ -18,8 +18,8 @@
     },
     {
       "patient": {
-        "name": "Ice cream sandwich ipsum dolor",
-        "img": "https://cdn.quasar.dev/img/avatar.png"
+        "name": "Fokou Fredy",
+        "img": "https://res.cloudinary.com/bilitts/image/upload/v1647436342/user-faces/Fokou_kldeij.jpg"
       },
       "address": "Carrefour Messassi",
       "age": 12,

@@ -1,22 +1,31 @@
-const routes = [
-  {
+const routes = [{
     path: "/",
     component: () => import("layouts/AuthLayout.vue"),
-    children: [
-      { path: "", component: () => import("src/pages/Index.vue") },
-      { path: "register", component: () => import("pages/Signup.vue") },
+    children: [{
+        path: "",
+        component: () => import("src/pages/Index.vue")
+      },
+      {
+        path: "register",
+        component: () => import("pages/Signup.vue")
+      },
     ],
   },
   {
     path: "/dashboard",
     component: () => import("layouts/MainLayout.vue"),
-    children: [{ path: "", component: () => import("pages/Dashboard.vue") }],
+    children: [{
+      path: "",
+      component: () => import("pages/Dashboard.vue")
+    }],
   },
   {
     path: "/patient",
     component: () => import("layouts/MainLayout.vue"),
-    children: [
-      { path: "", component: () => import("pages/patient/Index.vue") },
+    children: [{
+        path: "",
+        component: () => import("pages/patient/Index.vue")
+      },
       {
         path: "booklet",
         component: () => import("pages/patient/Booklet.vue"),
@@ -25,17 +34,34 @@ const routes = [
         path: "profile",
         component: () => import("pages/patient/Profile.vue"),
       },
+      {
+        path: "profile-cam/name=:name",
+        component: () => import("pages/patient/Profile-cam.vue"),
+      },
     ],
   },
   {
     path: "/appointments",
     component: () => import("layouts/MainLayout.vue"),
-    children: [{ path: "", component: () => import("pages/Appointments.vue") }],
+    children: [{
+      path: "",
+      component: () => import("pages/Appointments.vue")
+    }],
   },
   {
     path: "/settings",
     component: () => import("layouts/MainLayout.vue"),
-    children: [{ path: "", component: () => import("pages/Settings.vue") }],
+    children: [{
+      path: "",
+      component: () => import("pages/Settings.vue")
+    }],
+  },
+  {
+    path: "/cam",
+    beforeEnter() {
+      location.href = 'http://localhost:3000/recognize'
+    },
+
   },
 
   // Always leave this as last one,

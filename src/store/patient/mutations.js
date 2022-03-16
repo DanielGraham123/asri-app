@@ -2,5 +2,10 @@
 
 export function patientProfile(state, payload) {
   state.profileToOpen = payload;
-  this.$router.push({ path: "/patient/profile" });
+
+  localStorage.setItem("patientProfile", JSON.stringify(payload));
+  console.log("this route", this.$route);
+  this.$router.push({
+    path: "/patient/profile"
+  });
 }
